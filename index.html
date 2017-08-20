@@ -1,8 +1,100 @@
 <!DOCTYPE html>
-<html>
-    <body style="background-color: darkgrey">
-        <h1 style="text-align:center">美女荷官发牌，就在澳门赌场</h1>
-        <hr />
-        <img src="images/yinwang_2.png"/>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        canvas { border: 1px solid black; }
+    </style>
+    <!-- gua game 相关文件 -->
+    <script src="./js/utils.js"></script>
+    <script src="./js/gua_game.js"></script>
+    <script src="./js/gua_scene.js"></script>
+    <script src="./js/gua_image.js"></script>
+    <script src="./js/gua_particle_system.js"></script>
+    <!-- 场景文件 -->
+    <script src="./js/paddle.js"></script>
+    <script src="./js/ball.js"></script>
+    <script src="./js/block.js"></script>
+    <script src="./js/scene.js"></script>
+    <!-- 结束和标题场景 -->
+    <script src="./js/scene_end.js"></script>
+    <script src="./js/scene_title.js"></script>
+    <!-- 关卡数据 -->
+    <script src="./js/level.js"></script>
+</head>
+<body>
+    <canvas id="id-canvas" width="300" height="500"></canvas>
+    <hr />
+    <input id='id-input-speed' type="range" value="1">
+    <div class="">
+        <!-- <textarea id="id-text-log" rows="20" cols="50"></textarea> -->
+    </div>
+    <div class="">
+        <label>
+            <input class="gua-auto-slider" type="range"
+                value=""
+                data-value="config.player_speed"
+                >
+            玩家速度: <span class="gua-label"></span>
+        </label>
+    </div>
+    <div class="">
+        <label>
+            <input class="gua-auto-slider" type="range"
+                value=""
+                max="10"
+                data-value="config.fire_cooldown"
+                >
+            子弹冷却时间: <span class="gua-label"></span>
+        </label>
+    </div>
+    <div class="">
+        <label>
+            <input class="gua-auto-slider" type="range"
+                value=""
+                min="-10"
+                max="10"
+                data-value="config.cloud_speed"
+                >
+            cloud speed: <span class="gua-label"></span>
+        </label>
+    </div>
+    <div class="">
+        <label>
+            <input class="gua-auto-slider" type="range"
+                value=""
+                data-value="config.bullet_speed"
+                >
+            bullet 速度: <span class="gua-label"></span>
+        </label>
+    </div>
+    <script src="./js/main.js"></script>
+    <script>
+        var es = sel => document.querySelectorAll(sel)
+
+        var bindAll = function(sel, eventName, callback) {
+            var l = es(sel)
+            for (var i = 0; i < l.length; i++) {
+                var input = l[i]
+                input.addEventListener(eventName, function(event){
+                    callback(event)
+                })
+            }
+        }
+
+        bindAll('.gua-auto-slider', 'input', function(event){
+            var target = event.target
+            var bindVar = target.dataset.value
+            var v = target.value
+            eval(bindVar + '=' + v)
+            //
+            console.log(v)
+            var label = target.closest('label').querySelector('.gua-label')
+            label.innerText = v
+        })
+    </script>
+</body>
 </html>
